@@ -63,6 +63,11 @@ class Rental extends \yii\db\ActiveRecord
         return $this->hasOne(RentalDescription::className(), ['id_rental' => 'id']);
     }
 
+    public function getReviews(): \yii\db\ActiveQuery
+    {
+        return $this->hasMany(Reviews::className(), ['id_rental' => 'id']);
+    }
+
     public function getPhoto($photo): string
     {
         $photos = preg_split('/\s+/', $photo);

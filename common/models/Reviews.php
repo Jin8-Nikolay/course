@@ -29,7 +29,7 @@ class Reviews extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_rental', 'appraisal', 'date'], 'required'],
+            [['id_rental', 'appraisal', 'date', 'text'], 'required', 'message' => '{attribute} не может быть пустым'],
             [['id_rental', 'id_user', 'appraisal', 'date'], 'integer'],
             [['id_user'], 'required', 'message' => 'Незарегестрированые не могут осталять отзывы.'],
             [['text'], 'string'],
@@ -49,5 +49,15 @@ class Reviews extends \yii\db\ActiveRecord
             'text' => 'Отзыв',
             'date' => 'Date',
         ];
+    }
+
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'id_user']);
+    }
+
+    public function getRental()
+    {
+        return $this->hasOne(Rental::className(), ['id' => 'id_rental']);
     }
 }

@@ -47,6 +47,16 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]);
     ?>
+    <p>
+    <div class="form-group">
+        <?php if ($model->status == \common\models\Rental::STATUS_INACTIVE): ?>
+            <a href="/rental/rent/<?= $model->id ?>" class="btn btn-danger">Снять Оренду</a>
+        <?php else: ?>
+            <a href="/rental/rent/<?= $model->id ?>" class="btn btn-success">Арендовать</a>
+        <?php endif; ?>
+    </div>
+    </p>
+
 </div>
 
 <div class="well">
@@ -79,4 +89,24 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php ActiveForm::end(); ?>
 
     </div>
+    <?php if (count($reviews)): ?>
+        <?php foreach ($reviews as $review): ?>
+            <div class="well">
+                <h3><?= $review->user->username ?></h3>
+                <p>
+                    Оценка: <?= $review->appraisal ?>
+                </p>
+                <p>
+                    <?php
+                    $date = new DateTime();
+                    $date->setTimestamp($review->date);
+                    echo $date->format('Y-m-d H:i:s') . "\n";
+                    ?>
+                </p>
+                <p>
+                    <?= $review->text ?>
+                </p>
+            </div>
+        <?php endforeach; ?>
+    <?php endif; ?>
 </div>

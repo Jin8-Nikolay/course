@@ -41,7 +41,8 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                'rental/details/<id>' => 'rental/details'
+                'rental/details/<id>' => 'rental/details',
+                'rental/rent/<id>' => 'rental/rent',
             ],
         ],
     ],
